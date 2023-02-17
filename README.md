@@ -12,13 +12,15 @@ In this paper, we propose the first stereo SSC method named OccDepth, which full
 
 Mesh results compared with ground truth on KITTI-08:
 <div align="center">
-<video width="670px" height="442px" src="assets/demo.mp4"></video>
+<img src="assets/demo.gif"></img>
 </div>
 
 # Results
 ## Qualitative Results
 <div align="center">
-<img src="assets/result2.png"/>
+<img width=374 src="assets/result2-1.png"/><img width=400 src="assets/result2-2.png"/>
+
+Fig. 1: RGB based Semantic Scene Completion with/without depth-aware. (a) Our proposed OccDepth method can detect smaller and farther objects. (b) Our proposed OccDepth method complete road better.
 </div>
 
 ## Quantitative results on SemanticKITTI
@@ -29,15 +31,15 @@ Table 1. Performance on SemanticKITTI (hidden test set).
 |Method            |Input        | SC  IoU       | SSC mIoU       |
 |:----------------:|:----------:|:--------------:|:--------------:|
 | **2.5D/3D**      |            |                |                |
-| LMSCNet$^{st}$   | OCC        | 33.00          | 5.80           |
-| AICNet$^{st}$    | RGB, DEPTH | 32.8           | 6.80           |
-| JS3CNet$^{st}$   | PTS        | 39.30          | 9.10           |
+| LMSCNet(st)   | OCC        | 33.00          | 5.80           |
+| AICNet(st)    | RGB, DEPTH | 32.8           | 6.80           |
+| JS3CNet(st)   | PTS        | 39.30          | 9.10           |
 | **2D**           |            |                |                |
 | MonoScene        | RGB        | 34.16          | 11.08          |
-| MonoScene$^{st}$ | Stereo RGB | 40.84          | 13.57          |
+| MonoScene(st) | Stereo RGB | 40.84          | 13.57          |
 | OccDepth (ours)  | Stereo RGB | **45.10**      | **15.90**      |
 </div>
-The scene completion (SC IoU) and semantic scene completion (SSC mIoU) are reported for modified baselines (marked with superscript "st") and our OccDepth.
+The scene completion (SC IoU) and semantic scene completion (SSC mIoU) are reported for modified baselines (marked with "st") and our OccDepth.
 
 ## Details results on SemanticKITTI.
 <div align="center">
