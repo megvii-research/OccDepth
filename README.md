@@ -11,14 +11,16 @@ In this paper, we propose the first stereo SSC method named OccDepth, which full
 # Video Demo
 
 Mesh results compared with ground truth on KITTI-08:
-<div align="center">
-<img src="assets/demo.gif"></img>
-</div>
+<p align="center">
+<img src="./assets/demo.gif"  />
+</p>
+
+A full demo video can be downloaded via `git lfs pull`, the demo video is saved as "assets/demo.mp4". 
 
 # Results
 ## Qualitative Results
 <div align="center">
-<img width=374 src="assets/result2-1.png"/><img width=400 src="assets/result2-2.png"/>
+<img width=374 src="./assets/result2-1.png"/><img width=400 src="./assets/result2-2.png"/>
 
 Fig. 1: RGB based Semantic Scene Completion with/without depth-aware. (a) Our proposed OccDepth method can detect smaller and farther objects. (b) Our proposed OccDepth method complete road better.
 </div>
@@ -43,7 +45,7 @@ The scene completion (SC IoU) and semantic scene completion (SSC mIoU) are repor
 
 ## Details results on SemanticKITTI.
 <div align="center">
-<img src="assets/result3.png"/>
+<img src="./assets/result3.png"/>
 </div>
 
 # License
