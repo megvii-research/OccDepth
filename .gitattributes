@@ -1,1 +1,2 @@
 assets/demo.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/demo_voxel.mp4 filter=lfs diff=lfs merge=lfs -text
