@@ -7,7 +7,7 @@ def collate_fn(batch, with_depth_gt=False):
     targets = []
     names = []
     cam_poses = []
-
+    virtual_bfs = []
     gt_depths = []
 
     vox_origins = []
@@ -38,7 +38,7 @@ def collate_fn(batch, with_depth_gt=False):
 
         img = input_dict["img"]
         imgs.append(img)
-
+        virtual_bfs.append(torch.from_numpy(input_dict["virtual_bf"]))
         if with_depth_gt and "gt_depth" in input_dict:
             gt_depth = input_dict["gt_depth"]
             gt_depths.append(gt_depth)
@@ -49,8 +49,8 @@ def collate_fn(batch, with_depth_gt=False):
     ret_data = {
         "CP_mega_matrices": CP_mega_matrices,
         "cam_pose": torch.stack(cam_poses),
-        # "cam_k": torch.stack(cam_ks),
         "cam_k": cam_ks,
+        "virtual_bf": torch.stack(virtual_bfs),
         "T_velo_2_cam": T_velo_2_cams,
         "ida_mats": ida_mats,
         "vox_origin": torch.stack(vox_origins),

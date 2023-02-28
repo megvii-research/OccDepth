@@ -205,7 +205,7 @@ class OccDepth(pl.LightningModule):
             raise NotImplementedError(f"{self.trans_2d_to_3d} is not supported yet.")
 
     def process_rgbs(self, img, batch, n_views):
-        depth_key = "depth"
+        depth_key = "gt_depth"
         x_rgb=[]
         x_rgb.append(self.net_rgb(img[:,0]))
         for i in range(1,n_views):
@@ -226,12 +226,11 @@ class OccDepth(pl.LightningModule):
         return x_rgb,n_views
 
     def generate_virtual_img(self,batch,x_single_rgb,scale_2d,bf):
-        depth_key = "depth"
+        depth_key = "gt_depth"
         depth_mat = batch[depth_key].to(device)
 
         x_scale = torch.clone(x_single_rgb)
         n_bs_scale, c_scale, h_scale, w_scale = x_scale.shape
-        depth_mat = depth_mat.unsqueeze(0)
         depth_mat_scale = nn.functional.interpolate(depth_mat,
                                         size=(h_scale,w_scale),
                                         mode="bilinear",
@@ -297,6 +296,8 @@ class OccDepth(pl.LightningModule):
                     self.flosp_depth_conf["downsample_factor"]
                 )
                 x_rgb_reshape = []
+                if self.dataset == "NYU":
+                    n_views = 1
                 for j in range(n_views):
                     x_rgb_reshape.append(x_rgb[j][rgb_feat_layer])
                 img_feat = torch.stack(x_rgb_reshape,1 ).to(device)

@@ -136,6 +136,8 @@ class NYUDataset(Dataset):
 
         # data["cam_k"] = self.cam_k
         data["cam_k"] = np.array([self.cam_k])
+        data["virtual_baseline"] = 0.1
+        data["virtual_bf"] = np.array(data["virtual_baseline"]* 518.8579) #0.1*fx
         target = data[
             "target_1_4"
         ]  # Following SSC literature, the output resolution on NYUv2 is set to 1:4
@@ -147,6 +149,9 @@ class NYUDataset(Dataset):
         )
         data["CP_mega_matrix"] = CP_mega_matrix
 
+        data["projected_pix_1"] = []
+        data["fov_mask_1"] = []
+        data["pix_z_1"] = []
         # compute the 3D-2D mapping
         projected_pix, fov_mask, pix_z = vox2pix(
             T_world_2_cam,
@@ -158,17 +163,40 @@ class NYUDataset(Dataset):
             self.scene_size,
             self.pattern_id,
         )
+        data["projected_pix_1"].append(projected_pix)
+        data["fov_mask_1"].append(fov_mask)
+        data["pix_z_1"].append(pix_z)
+        if self.with_depth_gt:
+            T_cam0_2_cam1 = np.array([
+                [1,0,0,-data["virtual_baseline"]],
+                [0,1,0,0],
+                [0,0,1,0],
+                [0,0,0,1],
+            ])
+            T_world_2_cam1 = T_cam0_2_cam1 @ T_world_2_cam
+            projected_pix_right, fov_mask_right, pix_z_right = vox2pix(
+                T_world_2_cam1,
+                self.cam_k,
+                vox_origin,
+                self.voxel_size,
+                self.img_W,
+                self.img_H,
+                self.scene_size,
+                self.pattern_id,
 
-        projected_pix = projected_pix[np.newaxis, ...]
-        fov_mask = fov_mask[np.newaxis, ...]
-        pix_z = pix_z[np.newaxis, ...]
-        data["projected_pix_1"] = projected_pix
-        data["fov_mask_1"] = fov_mask
+            )
+            data["projected_pix_1"].append(projected_pix_right)
+            data["fov_mask_1"].append(fov_mask_right)
+            data["pix_z_1"].append(pix_z_right)
+
+        data["projected_pix_1"] = np.array(data["projected_pix_1"])
+        data["fov_mask_1"] = np.array(data["fov_mask_1"])
+        data["pix_z_1"] = np.array(data["pix_z_1"])
 
         # compute the masks, each indicates voxels inside a frustum
         frustums_masks, frustums_class_dists = compute_local_frustums(
-            projected_pix,
-            pix_z,
+            data["projected_pix_1"],
+            data["pix_z_1"],
             target,
             self.img_W,
             self.img_H,
