@@ -54,7 +54,15 @@ The scene completion (SC IoU) and semantic scene completion (SSC mIoU) are repor
 <img src="./assets/result2.png"/>
 </div>
 
+## Compared with baselines.
+<div align="center">
+<img width=400 src="./assets/result3.png"/>
+</div>
+Baselines of 2.5D/3D-input methods. ”∗
+” means results are cited from MonoScene. ”/”
+means missing results
 # Usage
+
 ## Environment
 1. Create conda environment:
 ``` bash
