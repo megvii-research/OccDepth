@@ -3,7 +3,7 @@
 
 # News
 
-- Code will release soon!!
+- **2023/02/28** Initial code.
 - **2023/02/28** Paper released on [Arxiv](https://arxiv.org/abs/2302.13540).
 - **2023/02/17** Demo release.
 
@@ -54,10 +54,116 @@ The scene completion (SC IoU) and semantic scene completion (SSC mIoU) are repor
 <img src="./assets/result2.png"/>
 </div>
 
+# Usage
+## Environment
+1. Create conda environment:
+``` bash
+conda create -y -n occdepth python=3.7
+conda activate occdepth
+conda install pytorch==1.13.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.7 -c pytorch
+```
+2. Install dependencies:
+``` bash
+pip install -r requirements.txt
+conda install -c bioconda tbb=2020.2
+pip install torchmetrics==0.6.0
+pip install mmcv==1.4.0
+pip install mmdet==2.20.0
+pip install kornia==0.5.0
+pip install efficientnet_pytorch==0.7.1
+pip install einops==0.6.0
+pip install open3d==0.15.2
+```
 
+## Preparing
+
+### SemanticKITTI
+- Download kitti odometry and semantic dataset
+    - [SemanticKITTI voxel data (700 MB).](http://www.semantic-kitti.org/assets/data_odometry_voxels.zip)
+    - [KITTI Odometry Benchmark RGB images (color, 65 GB) and KITTI Odometry Benchmark calibration data  (calibration files, 1 MB)](https://www.cvlibs.net/datasets/kitti/eval_odometry.php)
+
+- Download preprocessed depth
+   - [KITTI_Odometry_Stereo_Depth](https://drive.google.com/file/d/1eJPJ1niczagkJfEv21_RdvYBDUbpaQ0w/view?usp=sharing)
+
+- Preprocessed kitti semantic data
+    ``` bash
+    cd occdepth/
+    python occdepth/data/semantic_kitti/preprocess.py data_root="/path/to/semantic_kitti" data_preprocess_root="/path/to/kitti/preprocess/folder"
+    ```
+
+
+### NYUv2
+- Download NYUv2 dataset
+    - [NYUv2](https://www.rocq.inria.fr/rits_files/computer-vision/monoscene/nyu.zip)
+
+- Preprocessed NYUv2 data
+    ``` bash
+    cd occdepth/
+    python occdepth/data/NYU/preprocess.py data_root="/path/to/NYU/depthbin"
+    data_preprocess_root="/path/to/NYU/preprocess/folder"
+    ```
+### Settings
+1. Setting `DATA_LOG`, `DATA_CONFIG` in `env_{dataset}.sh`, examples:
+    ``` bash
+    ##examples
+    export DATA_LOG=$workdir/logdir/semanticKITTI
+    export DATA_CONFIG=$workdir/occdepth/config/semantic_kitti/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml
+    ```
+2. Setting `data_root`, `data_preprocess_root` and `data_stereo_depth_root` in config file (occdepth/config/xxxx.yaml), examples:
+    ``` yaml
+    ##examples
+    data_root: '/data/dataset/KITTI_Odometry_Semantic'
+    data_preprocess_root: '/data/dataset/kitti_semantic_preprocess'
+    data_stereo_depth_root: '/data/dataset/KITTI_Odometry_Stereo_Depth'
+    ```
+
+## Inference
+
+``` bash
+cd occdepth/
+source env_{dataset}.sh
+## 4 gpus and batch size on each gpu is 1
+python occdepth/scripts/generate_output.py n_gpus=4 batch_size_per_gpu=1
+```
+
+## Evaluation
+``` bash
+cd occdepth/
+source env_{dataset}.sh
+## 1 gpu and batch size on each gpu is 1
+python occdepth/scripts/eval.py n_gpus=1 batch_size_per_gpu=1
+```
+## Training
+``` bash
+cd occdepth/
+source env_{dataset}.sh
+## 4 gpus and batch size on each gpu is 1
+python occdepth/scripts/train.py logdir=${DATA_LOG} n_gpus=4 batch_size_per_gpu=1
+```
 # License
 This repository is released under the Apache 2.0 license as found in the [LICENSE](LICENSE) file.
+
+# Acknowledgements
+Our code is based on these excellent open source projects: 
+- [MonoScene](https://github.com/astra-vision/MonoScene)
+- [SSC](https://github.com/waterljwant/SSC)
+- [UVTR](https://github.com/dvlab-research/UVTR)
+- [CaDDN](https://github.com/TRAILab/CaDDN)
+- [BEVDepth](https://github.com/Megvii-BaseDetection/BEVDepth)
+
+Many thanks to them!
 
 # Related Repo's
 * https://github.com/wzzheng/TPVFormer
 * https://github.com/FANG-MING/occupancy-for-nuscenes
+
+# Citation
+If you find this project useful in your research, please consider cite:
+```
+@article{miao2023occdepth,
+Author = {Ruihang Miao and Weizhou Liu and Mingrui Chen and Zheng Gong and Weixin Xu and Chen Hu and Shuchang Zhou},
+Title = {OccDepth: A Depth-Aware Method for 3D Semantic Scene Completion},
+journal = {arXiv:2302.13540},
+Year = {2023},
+}
+```
