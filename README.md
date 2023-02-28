@@ -95,7 +95,7 @@ pip install open3d==0.15.2
 
 - Preprocessed kitti semantic data
     ``` bash
-    cd occdepth/
+    cd OccDepth/
     python occdepth/data/semantic_kitti/preprocess.py data_root="/path/to/semantic_kitti" data_preprocess_root="/path/to/kitti/preprocess/folder"
     ```
 
@@ -106,7 +106,7 @@ pip install open3d==0.15.2
 
 - Preprocessed NYUv2 data
     ``` bash
-    cd occdepth/
+    cd OccDepth/
     python occdepth/data/NYU/preprocess.py data_root="/path/to/NYU/depthbin"
     data_preprocess_root="/path/to/NYU/preprocess/folder"
     ```
@@ -128,7 +128,7 @@ pip install open3d==0.15.2
 ## Inference
 
 ``` bash
-cd occdepth/
+cd OccDepth/
 source env_{dataset}.sh
 ## 4 gpus and batch size on each gpu is 1
 python occdepth/scripts/generate_output.py n_gpus=4 batch_size_per_gpu=1
@@ -136,14 +136,14 @@ python occdepth/scripts/generate_output.py n_gpus=4 batch_size_per_gpu=1
 
 ## Evaluation
 ``` bash
-cd occdepth/
+cd OccDepth/
 source env_{dataset}.sh
 ## 1 gpu and batch size on each gpu is 1
 python occdepth/scripts/eval.py n_gpus=1 batch_size_per_gpu=1
 ```
 ## Training
 ``` bash
-cd occdepth/
+cd OccDepth/
 source env_{dataset}.sh
 ## 4 gpus and batch size on each gpu is 1
 python occdepth/scripts/train.py logdir=${DATA_LOG} n_gpus=4 batch_size_per_gpu=1
