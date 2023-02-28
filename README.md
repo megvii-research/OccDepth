@@ -165,6 +165,7 @@ Many thanks to them!
 # Related Repo's
 * https://github.com/wzzheng/TPVFormer
 * https://github.com/FANG-MING/occupancy-for-nuscenes
+* https://github.com/nvlabs/voxformer
 
 # Citation
 If you find this project useful in your research, please consider cite:
