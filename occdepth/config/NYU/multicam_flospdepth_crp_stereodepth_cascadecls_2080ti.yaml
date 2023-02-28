@@ -1,0 +1,69 @@
+### dataset
+#dataset: "NYU" # "kitti", "tartanair"
+dataset: "NYU"
+
+n_relations: 4
+
+enable_log: true
+data_root: '/data/dataset/NYU_dataset/depthbin/'
+data_preprocess_root: '/data/dataset/NYU_dataset_preprocess'
+data_stereo_depth_root: ''
+data_lidar_depth_root: ''
+
+logdir: 'logdir'
+
+### training cfg
+max_epochs: 30 # 训练 epoch 数量
+gradient_clip_val: 35 # gradient clip val (0 FOR w/o gradient clip)
+use_stereo_depth_gt: false # stereo depth 监督，只有 kitti 支持
+use_lidar_depth_gt: false # lidar depth 监督，只有 kitti 支持
+use_depth_gt: true # depth gt 监督，只有 nyu 支持
+depth_loss_weight: 1.0 # depth loss 权重
+deterministic: false # will increase gpu memory usage
+use_strong_img_aug: false # 图像域增广
+sem_step_decay_loss: false # sem loss step decay
+
+fp_loss: true
+frustum_size: 8
+batch_size_per_gpu: 1
+n_gpus: 1
+num_workers_per_gpu: 0
+exp_prefix: "kitti_exp"
+run: 1
+lr: 2e-4
+weight_decay: 1e-4
+
+context_prior: true # crp loss
+
+relation_loss: true
+CE_ssc_loss: true
+sem_scal_loss: true
+geo_scal_loss: true
+
+project_1_2: true
+project_1_4: true
+project_1_8: true
+
+ckpt: ''
+
+### MultiView
+multi_view_mode: false # 多摄模式，只有 kitti 支持多摄
+pattern_id: 0 # flosp 取点逻辑
+
+### network config
+full_scene_size: # 3d scene 尺寸定义
+  - 60
+  - 36
+  - 60
+project_scale: 1 # 投影到 3d voxel 的下采样倍数
+feature: 100 # 3d 网络 channel 维度
+feature_2d_oc: 100 # # 2d 网络输出 channel 维度
+n_classes: 12 # 分类数目
+backbone_2d_name: 'tf_efficientnet_b3_ns' # 2d backbone 定义
+return_up_feats: 1 # choices:1, 2, 4, 8; help: 2d backbone 返回的最大特征尺寸设定
+cascade_cls: true # 级联分类
+occluded_cls: false # occluded 分类，只有 kitti 支持
+
+### 2d->3d transformation
+trans_2d_to_3d_debug: false
+trans_2d_to_3d: "flosp" # "cvt","lss", "flosp", "bevformer", "grid_sampling", "flosp_depth", "lss"

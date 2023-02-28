@@ -433,7 +433,7 @@ class OccDepth(pl.LightningModule):
                     sync_dist=True,
                 )
 
-        if self.with_depth_gt and "gt_depth" in batch:
+        if self.with_depth_gt and self.trans_2d_to_3d=="flosp_depth" and "gt_depth" in batch:
             if self.use_stereo_depth_gt:
                 depth_pred = out_dict["depth_pred"][:, 0].unsqueeze(
                     1
