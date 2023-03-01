@@ -73,19 +73,12 @@ means missing results
 ``` bash
 conda create -y -n occdepth python=3.7
 conda activate occdepth
-conda install pytorch==1.13.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=11.7 -c pytorch
+conda install pytorch==1.13.1 torchvision==0.13.1 torchaudio==0.12.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 2. Install dependencies:
 ``` bash
 pip install -r requirements.txt
 conda install -c bioconda tbb=2020.2
-pip install torchmetrics==0.6.0
-pip install mmcv==1.4.0
-pip install mmdet==2.20.0
-pip install kornia==0.5.0
-pip install efficientnet_pytorch==0.7.1
-pip install einops==0.6.0
-pip install open3d==0.15.2
 ```
 
 ## Preparing
