@@ -68,4 +68,4 @@ occluded_cls: false # occluded 分类，只有 kitti 支持
 
 ### 2d->3d transformation
 trans_2d_to_3d_debug: false
-trans_2d_to_3d: "flosp_depth" # "cvt","lss", "flosp", "bevformer", "grid_sampling", "flosp_depth", "lss"
+trans_2d_to_3d: "flosp_depth" # "flosp",  "flosp_depth"

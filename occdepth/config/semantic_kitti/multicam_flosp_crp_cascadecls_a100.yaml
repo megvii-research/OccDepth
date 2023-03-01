@@ -83,4 +83,4 @@ pretrain_model_path: "/data/models/efficientnetv7_feat64/model_iter_0045000.pth"
 
 ### 2d->3d transformation
 trans_2d_to_3d_debug: false
-trans_2d_to_3d: "flosp" # "cvt","lss", "flosp", "bevformer", "grid_sampling", "flosp_depth", "lss"
+trans_2d_to_3d: "flosp" # "flosp",  "flosp_depth"

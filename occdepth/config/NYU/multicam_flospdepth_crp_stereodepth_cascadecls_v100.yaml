@@ -1,25 +1,23 @@
 ### dataset
 #dataset: "NYU" # "kitti", "tartanair"
-dataset: "kitti"
+dataset: "NYU"
 
 n_relations: 4
 
 enable_log: true
-data_root: '/data/dataset/KITTI_Odometry_Semantic'
-data_preprocess_root: '/data/dataset/kitti_semantic_preprocess'
-data_stereo_depth_root: '/data/dataset/KITTI_Odometry_Stereo_Depth'
-data_lidar_depth_root: '/data/dataset/KITTI_Odometry_Lidar_Depth'
+data_root: '/data/dataset/NYU_dataset/depthbin/'
+data_preprocess_root: '/data/dataset/NYU_dataset_preprocess'
+data_stereo_depth_root: ''
+data_lidar_depth_root: ''
 
-#data_root: '/data/dataset/NYU_dataset/depthbin/'
-#data_preprocess_root: '/data/dataset/NYU_dataset_preprocess'
 logdir: 'logdir'
 
 ### training cfg
 max_epochs: 30 # 训练 epoch 数量
 gradient_clip_val: 35 # gradient clip val (0 FOR w/o gradient clip)
-use_stereo_depth_gt: true # stereo depth 监督，只有 kitti 支持
+use_stereo_depth_gt: false # stereo depth 监督，只有 kitti 支持
 use_lidar_depth_gt: false # lidar depth 监督，只有 kitti 支持
-use_depth_gt: false # depth gt 监督，只有 nyu 支持
+use_depth_gt: true # depth gt 监督，只有 nyu 支持
 depth_loss_weight: 1.0 # depth loss 权重
 deterministic: false # will increase gpu memory usage
 use_strong_img_aug: false # 图像域增广
@@ -49,23 +47,23 @@ project_1_8: true
 ckpt: ''
 
 ### MultiView
-multi_view_mode: true # 多摄模式，只有 kitti 支持多摄
+multi_view_mode: false # 多摄模式，只有 kitti 支持多摄
 pattern_id: 0 # flosp 取点逻辑
 
 ### network config
 full_scene_size: # 3d scene 尺寸定义
-  - 256
-  - 256
-  - 32
-project_scale: 2 # 投影到 3d voxel 的下采样倍数
-feature: 32 # 3d 网络 channel 维度
-feature_2d_oc: 32 # # 2d 网络输出 channel 维度
-n_classes: 20 # 分类数目
-backbone_2d_name: 'tf_efficientnet_b3_ns' # 2d backbone 定义
+  - 60
+  - 36
+  - 60
+project_scale: 1 # 投影到 3d voxel 的下采样倍数
+feature: 200 # 3d 网络 channel 维度
+feature_2d_oc: 200 # # 2d 网络输出 channel 维度
+n_classes: 12 # 分类数目
+backbone_2d_name: 'tf_efficientnet_b7_ns' # 2d backbone 定义
 return_up_feats: 1 # choices:1, 2, 4, 8; help: 2d backbone 返回的最大特征尺寸设定
 cascade_cls: true # 级联分类
 occluded_cls: false # occluded 分类，只有 kitti 支持
 
 ### 2d->3d transformation
 trans_2d_to_3d_debug: false
-trans_2d_to_3d: "flosp_depth" # "flosp",  "flosp_depth"
+trans_2d_to_3d: "flosp" # "flosp",  "flosp_depth"

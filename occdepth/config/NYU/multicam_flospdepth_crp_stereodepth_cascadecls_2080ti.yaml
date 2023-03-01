@@ -59,11 +59,11 @@ project_scale: 1 # 投影到 3d voxel 的下采样倍数
 feature: 100 # 3d 网络 channel 维度
 feature_2d_oc: 100 # # 2d 网络输出 channel 维度
 n_classes: 12 # 分类数目
-backbone_2d_name: 'tf_efficientnet_b3_ns' # 2d backbone 定义
+backbone_2d_name: 'tf_efficientnet_b4_ns' # 2d backbone 定义
 return_up_feats: 1 # choices:1, 2, 4, 8; help: 2d backbone 返回的最大特征尺寸设定
 cascade_cls: true # 级联分类
 occluded_cls: false # occluded 分类，只有 kitti 支持
 
 ### 2d->3d transformation
 trans_2d_to_3d_debug: false
-trans_2d_to_3d: "flosp" # "cvt","lss", "flosp", "bevformer", "grid_sampling", "flosp_depth", "lss"
+trans_2d_to_3d: "flosp" # "flosp",  "flosp_depth"

@@ -83,7 +83,7 @@ class NYUDataModule(pl.LightningDataModule):
             drop_last=False,
             shuffle=False,
             pin_memory=True,
-            collate_fn=partial(collate_fn, with_depth_gt=False),
+            collate_fn=partial(collate_fn, with_depth_gt=self.with_depth_gt),
         )
 
     def test_dataloader(self):
@@ -97,5 +97,5 @@ class NYUDataModule(pl.LightningDataModule):
             drop_last=False,
             shuffle=False,
             pin_memory=True,
-            collate_fn=partial(collate_fn, with_depth_gt=False),
+            collate_fn=partial(collate_fn, with_depth_gt=self.with_depth_gt),
         )
