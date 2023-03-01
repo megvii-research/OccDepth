@@ -73,7 +73,7 @@ means missing results
 ``` bash
 conda create -y -n occdepth python=3.7
 conda activate occdepth
-conda install pytorch==1.13.1 torchvision==0.13.1 torchaudio==0.12.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 2. Install dependencies:
 ``` bash
