@@ -159,7 +159,7 @@ Our code is based on these excellent open source projects:
 
 Many thanks to them!
 
-# Related Repo's
+# Related Repos
 * https://github.com/wzzheng/TPVFormer
 * https://github.com/FANG-MING/occupancy-for-nuscenes
 * https://github.com/nvlabs/voxformer
@@ -174,3 +174,6 @@ journal = {arXiv:2302.13540},
 Year = {2023},
 }
 ```
+# Contact
+If you have any questions, feel free to open an issue or contact us at miaoruihang@megvii.com, huchen@megvii.com.
+
