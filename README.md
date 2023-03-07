@@ -6,13 +6,12 @@
 	
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/occdepth-a-depth-aware-method-for-3d-semantic/3d-semantic-scene-completion-on-nyuv2)](https://paperswithcode.com/sota/3d-semantic-scene-completion-on-nyuv2?p=occdepth-a-depth-aware-method-for-3d-semantic)
 # News
-
-- **2023/02/28** Initial code.
+- **2023/02/28** Initial code. Stereo images and RGB-D images are supported.
 - **2023/02/28** Paper released on [Arxiv](https://arxiv.org/abs/2302.13540).
 - **2023/02/17** Demo release.
 
 # Abstract
-In this paper, we propose the first stereo SSC method named OccDepth, which fully exploits implicit depth information from stereo images to help the recovery of 3D geometric structures. The Stereo Soft Feature Assignment (Stereo-SFA) module is proposed to better fuse 3D depth-aware features by implicitly learning the correlation between stereo images. Besides, the Occupancy Aware Depth (OAD) module is used to obtain geometry-aware 3D features by knowledge distillation using pre-trained depth models. In addition, a reformed TartanAir benchmark, named SemanticTartanAir, is provided in this paper for further testing our OccDepth method on SSC task.
+In this paper, we propose the first stereo SSC method named OccDepth, which fully exploits implicit depth information from stereo images (or RGBD images) to help the recovery of 3D geometric structures. The Stereo Soft Feature Assignment (Stereo-SFA) module is proposed to better fuse 3D depth-aware features by implicitly learning the correlation between stereo images. In particular, when the input are RGBD image, a virtual stereo images can be generated through original RGB image and depth map. Besides, the Occupancy Aware Depth (OAD) module is used to obtain geometry-aware 3D features by knowledge distillation using pre-trained depth models.
 
 # Video Demo
 
