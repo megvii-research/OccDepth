@@ -6,7 +6,7 @@
 	
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/occdepth-a-depth-aware-method-for-3d-semantic/3d-semantic-scene-completion-on-nyuv2)](https://paperswithcode.com/sota/3d-semantic-scene-completion-on-nyuv2?p=occdepth-a-depth-aware-method-for-3d-semantic)
 # News
-- **2023/02/28** Initial code. Stereo images and RGB-D images are supported.
+- **2023/02/28** Initial code release. Both Stereo images and RGB-D images inputs are supported.
 - **2023/02/28** Paper released on [Arxiv](https://arxiv.org/abs/2302.13540).
 - **2023/02/17** Demo release.
 
