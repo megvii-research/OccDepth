@@ -142,8 +142,8 @@ def _downsample_label(label, voxel_size=(240, 144, 240), downscale=4):
             label_downscale[x, y, z] = np.argmax(np.bincount(label_i_s))
     return label_downscale
 
-
-@hydra.main(config_name=None)
+config_path= os.getenv('DATA_CONFIG')
+@hydra.main(config_name=config_path)
 def main(config: DictConfig):
     scene_size = (240, 144, 240)
     for split in ["train", "test"]:

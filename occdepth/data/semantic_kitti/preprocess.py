@@ -39,8 +39,8 @@ def majority_pooling(grid, k_size=2):
                 result[xx, yy, zz] = value
     return result
 
-
-@hydra.main(config_name=None)
+config_path= os.getenv('DATA_CONFIG')
+@hydra.main(config_name=config_path)
 def main(config: DictConfig):
     scene_size = (256, 256, 32)
     sequences = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
