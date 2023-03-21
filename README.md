@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/badge/Ranked%20%231-Camera--Only%203D%20Semantic%20Scene%20Completion%20on%20SemanticKITTI-blue "")
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/occdepth-a-depth-aware-method-for-3d-semantic/3d-semantic-scene-completion-on-synlidar-to)](https://paperswithcode.com/sota/3d-semantic-scene-completion-on-synlidar-to?p=occdepth-a-depth-aware-method-for-3d-semantic)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/occdepth-a-depth-aware-method-for-3d-semantic/3d-semantic-scene-completion-on-semantickitti)](https://paperswithcode.com/sota/3d-semantic-scene-completion-on-semantickitti?p=occdepth-a-depth-aware-method-for-3d-semantic)
 	
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/occdepth-a-depth-aware-method-for-3d-semantic/3d-semantic-scene-completion-on-nyuv2)](https://paperswithcode.com/sota/3d-semantic-scene-completion-on-nyuv2?p=occdepth-a-depth-aware-method-for-3d-semantic)
 # News
