@@ -26,6 +26,15 @@ Voxel results compared with ground truth on KITTI-08:
 Full demo videos can be downloaded via `git lfs pull`, the demo videos are saved as "assets/demo.mp4" and "assets/demo_voxel.mp4". 
 
 # Results
+## Trained models
+
+The trained models on GeForce RTX 2080 Ti are provided:
+| Config| dataset |IoU| mIoU |  Download |
+| :---: | :---: | :---: | :---: | :---:|
+| [config](occdepth/config/semantic_kitti/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml) | SemanticKITTI | 41.60| 12.84|[model](https://drive.google.com/file/d/1MGJ_HZcuW5UpULpOeJV0M5ZrT-98j7OE/view?usp=share_link) |
+| [config](occdepth/config/NYU/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml) | NYUv2 | 48.90| 28.83|[model](https://drive.google.com/file/d/1tBKB-J6NAxDTRTOE1hwAacRmwu57q8L8/view?usp=share_link)|
+
+Note: If you want to get better results, you should set `share_2d_backbone_gradient = false`, `backbone_2d_name = tf_efficientnet_b7_ns` and `feature = 64 (SemanticKITTI)/200 (NYU)` which needs more GPU memory.
 ## Qualitative Results
 <div align="center">
 <img width=374 src="./assets/result1-1.png"/><img width=400 src="./assets/result1-2.png"/>
@@ -127,6 +136,7 @@ conda install -c bioconda tbb=2020.2
 ``` bash
 cd OccDepth/
 source env_{dataset}.sh
+## move the trained model to OccDepth/trained_models/occdepth.ckpt
 ## 4 gpus and batch size on each gpu is 1
 python occdepth/scripts/generate_output.py n_gpus=4 batch_size_per_gpu=1
 ```
@@ -135,6 +145,7 @@ python occdepth/scripts/generate_output.py n_gpus=4 batch_size_per_gpu=1
 ``` bash
 cd OccDepth/
 source env_{dataset}.sh
+## move the trained model to OccDepth/trained_models/occdepth.ckpt
 ## 1 gpu and batch size on each gpu is 1
 python occdepth/scripts/eval.py n_gpus=1 batch_size_per_gpu=1
 ```
