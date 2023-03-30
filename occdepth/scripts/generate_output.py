@@ -23,9 +23,7 @@ config_path= os.getenv('DATA_CONFIG')
 @hydra.main(config_name=config_path)
 def main(config: DictConfig):
     torch.set_grad_enabled(False)
-    load_strict = not (config.conv3d_triplane_super or config.use_dino_distill)
-    config.conv3d_triplane_super = False
-    config.use_dino_distill = False
+    load_strict = True
 
     # Setup dataloader
     if config.dataset == "kitti":

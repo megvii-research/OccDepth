@@ -15,11 +15,9 @@ config_path= os.getenv('DATA_CONFIG')
 @hydra.main(config_name=config_path)
 def main(config: DictConfig):
     torch.set_grad_enabled(False)
-    load_strict = not (config.conv3d_triplane_super or config.use_dino_distill)
-    config.conv3d_triplane_super = False
-    config.use_dino_distill = False
+    load_strict = True
     if config.dataset == "kitti":
-        config.batch_size = 1
+        config.batch_size_per_gpu = 1
         full_scene_size = tuple(config.full_scene_size)
         data_module = KittiDataModule(
             root=config.data_root,
@@ -36,7 +34,7 @@ def main(config: DictConfig):
         )
 
     elif config.dataset == "NYU":
-        config.batch_size = 1
+        config.batch_size_per_gpu = 1
         full_scene_size = tuple(config.full_scene_size)
         data_module = NYUDataModule(
             root=config.data_root,

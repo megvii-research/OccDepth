@@ -25,17 +25,7 @@ deterministic: false # will increase gpu memory usage
 use_strong_img_aug: false # 图像域增广
 sem_step_decay_loss: false # sem loss step decay
 
-#### dino distill
-use_dino_distill: false # dino distillation
-dino_super_mode: "2d" # 2d or 3d
-dino_reduce_mode: "conv" # conv or pca
-
-#### triplane
-use_triplane: false # Replace conv3d encoder with triplane
-triplane_channel_base: [32, 64, 128] # mobilenetv2 base channel (first stage, second stage, third stage)
-conv3d_triplane_super: false # use conv3d unet distillation
-triplane_distill_w: 0.1 # distill weight
-conv3d_triplane_teacher_path: '' # 需要单独训练一个 feature 尺度一样的带 3d unet 的 teacher 模型
+share_2d_backbone_gradient: true #true: save gpu memory, false: higher scores
 
 fp_loss: true
 frustum_size: 8
@@ -77,10 +67,6 @@ backbone_2d_name: 'tf_efficientnet_b3_ns' # 2d backbone 定义
 return_up_feats: 1 # choices:1, 2, 4, 8; help: 2d backbone 返回的最大特征尺寸设定
 cascade_cls: false # 级联分类
 occluded_cls: false # occluded 分类，只有 kitti 支持
-use_2d_pretrain_model: false # 导入 2d pretrain 模型参数
-
-pretrain_model_path: "/data/models/efficientnetv3_feat24/model_iter_0045000.pth" # 2d pretrain 模型地址
-
 
 ### 2d->3d transformation
 trans_2d_to_3d_debug: false

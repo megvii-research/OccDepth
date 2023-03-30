@@ -70,6 +70,7 @@ class OccDepth(pl.LightningModule):
 
         # multi_view_mode
         self.multi_view_mode = config.multi_view_mode
+        self.share_2d_backbone_gradient = config.share_2d_backbone_gradient
 
         # cascade cls
         print("INFO: Use cascade cls: {}".format(self.cascade_cls))
@@ -209,7 +210,11 @@ class OccDepth(pl.LightningModule):
         x_rgb=[]
         x_rgb.append(self.net_rgb(img[:,0]))
         for i in range(1,n_views):
-            with torch.no_grad():
+            if(self.share_2d_backbone_gradient):#save gpu memory, lower score
+                with torch.no_grad():
+                    x_single_rgb=self.net_rgb(img[:,i])
+                    x_rgb.append(x_single_rgb)
+            else: #need more gpu memory, higher score
                 x_single_rgb=self.net_rgb(img[:,i])
                 x_rgb.append(x_single_rgb)
 
@@ -366,7 +371,7 @@ class OccDepth(pl.LightningModule):
         input_dict = {"x3d": x3ds}
         net_out = self.net_3d_decoder(input_dict)
         out.update(net_out)
-        if self.with_depth_gt:
+        if self.with_depth_gt and self.trans_2d_to_3d=="flosp_depth":
             out["depth_pred"] = depth_pred
         return out
 

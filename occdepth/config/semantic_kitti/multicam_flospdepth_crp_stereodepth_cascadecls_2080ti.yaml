@@ -25,6 +25,8 @@ deterministic: false # will increase gpu memory usage
 use_strong_img_aug: false # 图像域增广
 sem_step_decay_loss: false # sem loss step decay
 
+share_2d_backbone_gradient: true #true: save gpu memory, false: higher scores
+
 fp_loss: true
 frustum_size: 8
 batch_size_per_gpu: 1
