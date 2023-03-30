@@ -6,6 +6,7 @@
 	
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/occdepth-a-depth-aware-method-for-3d-semantic/3d-semantic-scene-completion-on-nyuv2)](https://paperswithcode.com/sota/3d-semantic-scene-completion-on-nyuv2?p=occdepth-a-depth-aware-method-for-3d-semantic)
 # News
+- **2023/03/30** Release trained models on GeForce RTX 2080 Ti.
 - **2023/02/28** Initial code release. Both Stereo images and RGB-D images inputs are supported.
 - **2023/02/28** Paper released on [Arxiv](https://arxiv.org/abs/2302.13540).
 - **2023/02/17** Demo release.
@@ -34,7 +35,7 @@ The trained models on GeForce RTX 2080 Ti are provided:
 | [config](occdepth/config/semantic_kitti/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml) | SemanticKITTI | 41.60| 12.84|[model](https://drive.google.com/file/d/1MGJ_HZcuW5UpULpOeJV0M5ZrT-98j7OE/view?usp=share_link) |
 | [config](occdepth/config/NYU/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml) | NYUv2 | 48.90| 28.83|[model](https://drive.google.com/file/d/1tBKB-J6NAxDTRTOE1hwAacRmwu57q8L8/view?usp=share_link)|
 
-Note: If you want to get better results, you should set `share_2d_backbone_gradient = false`, `backbone_2d_name = tf_efficientnet_b7_ns` and `feature = 64 (SemanticKITTI)/200 (NYU)` which needs more GPU memory.
+Note: If you want to get better results, you should set `share_2d_backbone_gradient = false`, `backbone_2d_name = tf_efficientnet_b7_ns` and `feature = feature_2d_oc = 64 (SemanticKITTI)` which needs more GPU memory.
 ## Qualitative Results
 <div align="center">
 <img width=374 src="./assets/result1-1.png"/><img width=400 src="./assets/result1-2.png"/>
