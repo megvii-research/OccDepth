@@ -33,7 +33,7 @@ The trained models on GeForce RTX 2080 Ti are provided:
 | Config| dataset |IoU| mIoU |  Download |
 | :---: | :---: | :---: | :---: | :---:|
 | [config](occdepth/config/semantic_kitti/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml) | SemanticKITTI | 41.60| 12.84|[model](https://drive.google.com/file/d/1MGJ_HZcuW5UpULpOeJV0M5ZrT-98j7OE/view?usp=share_link) |
-| [config](occdepth/config/NYU/multicam_flospdepth_crp_stereodepth_cascadecls_2080ti.yaml) | NYUv2 | 48.90| 28.83|[model](https://drive.google.com/file/d/1tBKB-J6NAxDTRTOE1hwAacRmwu57q8L8/view?usp=share_link)|
+| [config](occdepth/config/NYU/multicam_flosp_crp_stereodepth_cascadecls_2080ti.yaml) | NYUv2 | 49.23| 29.34|[model](https://drive.google.com/file/d/1tBKB-J6NAxDTRTOE1hwAacRmwu57q8L8/view?usp=share_link)|
 
 Note: If you want to get better results, you should set `share_2d_backbone_gradient = false`, `backbone_2d_name = tf_efficientnet_b7_ns` and `feature = feature_2d_oc = 64 (SemanticKITTI)` which needs more GPU memory.
 ## Qualitative Results

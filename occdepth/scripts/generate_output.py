@@ -53,6 +53,8 @@ def main(config: DictConfig):
             frustum_size=config.frustum_size,
             batch_size=int(config.batch_size_per_gpu),
             num_workers=int(config.num_workers_per_gpu * config.n_gpus),
+            pattern_id=config.pattern_id,
+            use_depth_gt=config.use_depth_gt,
         )
         data_module.setup()
         data_loader = data_module.val_dataloader()
@@ -80,6 +82,7 @@ def main(config: DictConfig):
     # Save prediction and additional data
     # to draw the viewing frustum and remove scene outside the room for NYUv2
     output_path = os.path.join(config_path,"../../../../output", config.dataset)
+    output_path = os.path.abspath(output_path)
     with torch.no_grad():
         for batch in tqdm(data_loader):
             batch["img"] = batch["img"].cuda()
@@ -90,7 +93,7 @@ def main(config: DictConfig):
             pred = model(batch)
             y_pred = torch.softmax(pred["ssc_logit"], dim=1).detach().cpu().numpy()
             y_pred = np.argmax(y_pred, axis=1)
-            for i in range(config.batch_size):
+            for i in range(config.batch_size_per_gpu):
                 out_dict = {"y_pred": y_pred[i].astype(np.uint16)}
                 if "target" in batch:
                     out_dict["target"] = (

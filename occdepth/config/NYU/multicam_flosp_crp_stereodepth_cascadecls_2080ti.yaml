@@ -35,7 +35,7 @@ run: 1
 lr: 2e-4
 weight_decay: 1e-4
 
-context_prior: true # crp loss
+context_prior: false # crp loss
 
 relation_loss: true
 CE_ssc_loss: true
@@ -63,7 +63,7 @@ feature_2d_oc: 100 # # 2d 网络输出 channel 维度
 n_classes: 12 # 分类数目
 backbone_2d_name: 'tf_efficientnet_b4_ns' # 2d backbone 定义
 return_up_feats: 1 # choices:1, 2, 4, 8; help: 2d backbone 返回的最大特征尺寸设定
-cascade_cls: true # 级联分类
+cascade_cls: false # 级联分类
 occluded_cls: false # occluded 分类，只有 kitti 支持
 
 ### 2d->3d transformation

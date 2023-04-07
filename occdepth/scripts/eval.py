@@ -44,6 +44,7 @@ def main(config: DictConfig):
             batch_size=int(config.batch_size_per_gpu),
             num_workers=int(config.num_workers_per_gpu * config.n_gpus),
             pattern_id=config.pattern_id,
+            use_depth_gt=config.use_depth_gt,
         )
     elif config.dataset == "tartanair":
         data_module = TartanAirDataModule(
