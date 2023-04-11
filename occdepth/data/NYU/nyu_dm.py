@@ -99,3 +99,34 @@ class NYUDataModule(pl.LightningDataModule):
             pin_memory=True,
             collate_fn=partial(collate_fn, with_depth_gt=self.with_depth_gt),
         )
+
+if __name__ == '__main__':
+    import pickle,random,torch,hydra,os
+    import numpy as np
+    def set_random_seed(seed):
+        random.seed(seed)
+        np.random.seed(seed)
+        torch.manual_seed(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
+    config_path= os.getenv('DATA_CONFIG')
+    pwd_dir = os.path.abspath(os.path.join(config_path, "../../../.."))
+    @hydra.main(config_name=config_path)
+    def test(config):
+        ds = NYUDataModule(
+            root=config.data_root,
+            preprocess_root=config.data_preprocess_root,
+            frustum_size=8,
+            batch_size=1,
+            num_workers=0,
+        )
+        ds.setup()
+        train_ds = ds.train_dataloader()
+        for i, d in enumerate(train_ds):
+            print(i,d["name"])
+            with open(os.path.join(pwd_dir,"data.pkl"), "wb") as f:
+                pickle.dump(d, f)
+            break
+    set_random_seed(23456)
+    test()
