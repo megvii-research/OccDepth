@@ -685,7 +685,7 @@ if __name__ == "__main__":
             print("Export onnx:")
             torch.onnx.export(
                 model,
-                fake_data,
+                {"batch":fake_data},
                 "total_model.onnx",
                 opset_version=13,
                 do_constant_folding=True,
